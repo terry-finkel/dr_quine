@@ -1,10 +1,18 @@
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include<fcntl.h>
+#include<stdio.h>
+#include<stdlib.h>
 int k=5;
-#define F1 int main(void){int fd=open("Sully_5.c",0);if(fd!=-1){close(fd);k-=1;}char buff[62];(sprintf)(buff,"Sully_%d.c",k);FILE *f=fopen(buff,"w");fprintf(f, "#include <fcntl.h>\n#include <stdio.h>\n#include <stdlib.h>\n#include <unistd.h>\nint k=%d;\n#define F1 %s\n#define F2(x) #x\n#define F3(x) F2(x)\nconst char *s = F3(F1);\nF1\n",k,s);fclose(f);(sprintf)(buff,"gcc -Wall -Wextra -Werror Sully_%d.c -o Sully_%d",k,k);system(buff);if(k!=0){(sprintf)(buff,"./Sully_%d",k);system(buff);}}
-#define F2(x) #x
-#define F3(x) F2(x)
-const char *s = F3(F1);
-F1
+int main(void) {
+#ifdef REP
+k-=1;
+#endif
+char buff[99];
+sprintf(buff,"Sully_%d.c",k);
+FILE *f=fopen(buff,"w");
+const char *s="#include<fcntl.h>%c#include<stdio.h>%c#include<stdlib.h>%cint k=%d;%cint main(void) {%c#ifdef REP%ck-=1;%c#endif%cchar buff[99];%csprintf(buff,%cSully_%%d.c%c,k);%cFILE *f=fopen(buff,%cw%c);%cconst char *s=%c%s%c;%cfprintf(f,s,10,10,10,k,10,10,10,10,10,10,34,34,10,34,34,10,34,s,34,10,10,10,34,34,10,10,34,34,10,10);%cfclose(f);%csprintf(buff,%cgcc -Wall -Wextra -Werror -DREP Sully_%%d.c -o Sully_%%d%c,k,k);%csystem(buff);%cif(k!=0){sprintf(buff,%c./Sully_%%d%c,k);system(buff);}%c}%c";
+fprintf(f,s,10,10,10,k,10,10,10,10,10,10,34,34,10,34,34,10,34,s,34,10,10,10,34,34,10,10,34,34,10,10);
+fclose(f);
+sprintf(buff,"gcc -Wall -Wextra -Werror -DREP Sully_%d.c -o Sully_%d",k,k);
+system(buff);
+if(k!=0){sprintf(buff,"./Sully_%d",k);system(buff);}
+}
