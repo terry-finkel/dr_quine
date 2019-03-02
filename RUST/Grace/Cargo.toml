@@ -1,0 +1,11 @@
+[package]
+name = "Grace"
+version = "0.1.0"
+authors = ["Terry Finkel <nfinkel@student.42.fr>"]
+edition = "2018"
+
+[dependencies]
+
+[[bin]]
+name = "Grace"
+path = "src/Grace.rs"

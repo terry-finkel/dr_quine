@@ -1,0 +1,11 @@
+[package]
+name = "Colleen"
+version = "0.1.0"
+authors = ["Terry Finkel <nfinkel@student.42.fr>"]
+edition = "2018"
+
+[dependencies]
+
+[[bin]]
+name = "Colleen"
+path = "src/Colleen.rs"
