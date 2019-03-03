@@ -11,8 +11,7 @@ BIN_2 :=				Grace
 BIN_3 :=				Sully
 
 #	Compiler
-CC :=					gcc
-FLAGS :=				-Wall -Wextra -Werror
+CC :=					rustc
 ifeq ($(OS), Darwin)
 	THREADS := 			$(shell sysctl -n hw.ncpu)
 else
@@ -21,9 +20,9 @@ endif
 FAST :=					-j$(THREADS)
 
 #	Sources
-BIN1_SRC :=				Colleen.c
-BIN2_SRC :=				Grace.c
-BIN3_SRC :=				Sully.c
+BIN1_SRC :=				Colleen.rs
+BIN2_SRC :=				Grace.rs
+BIN3_SRC :=				Sully.rs
 
 #################
 ##    RULES    ##
@@ -32,13 +31,13 @@ BIN3_SRC :=				Sully.c
 all: $(BIN_1) $(BIN_2) $(BIN_3)
 
 $(BIN_1):
-	@$(CC) $(FLAGS) $(BIN1_SRC) -o $@
+	@$(CC) $(BIN1_SRC) -o $@
 
 $(BIN_2):
-	@$(CC) $(FLAGS) $(BIN2_SRC) -o $@
+	@$(CC) $(BIN2_SRC) -o $@
 
 $(BIN_3):
-	@$(CC) $(FLAGS) $(BIN3_SRC) -o $@
+	@$(CC) $(BIN3_SRC) -o $@
 
 clean:
 
