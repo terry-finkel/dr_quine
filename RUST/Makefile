@@ -20,9 +20,9 @@ endif
 FAST :=					-j$(THREADS)
 
 #	Sources
-BIN1_SRC :=				Colleen.rs
-BIN2_SRC :=				Grace.rs
-BIN3_SRC :=				Sully.rs
+BIN1_SRC :=				$(BIN_1).rs
+BIN2_SRC :=				$(BIN_2).rs
+BIN3_SRC :=				$(BIN_3).rs
 
 #################
 ##    RULES    ##

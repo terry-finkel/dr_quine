@@ -21,9 +21,9 @@ endif
 FAST :=					-j$(THREADS)
 
 #	Sources
-BIN1_SRC :=				Colleen.c
-BIN2_SRC :=				Grace.c
-BIN3_SRC :=				Sully.c
+BIN1_SRC :=				$(BIN_1).c
+BIN2_SRC :=				$(BIN_2).c
+BIN3_SRC :=				$(BIN_3).c
 
 #################
 ##    RULES    ##
