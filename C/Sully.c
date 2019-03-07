@@ -2,15 +2,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 int k=5;
-int main(void) {
+int main(void){
 #ifdef REP
 k-=1;
 #endif
 char buff[99];
 sprintf(buff,"Sully_%d.c",k);
 FILE *f=fopen(buff,"w");
-const char *s="#include<fcntl.h>%c#include<stdio.h>%c#include<stdlib.h>%cint k=%d;%cint main(void) {%c#ifdef REP%ck-=1;%c#endif%cchar buff[99];%csprintf(buff,%cSully_%%d.c%c,k);%cFILE *f=fopen(buff,%cw%c);%cconst char *s=%c%s%c;%cfprintf(f,s,10,10,10,k,10,10,10,10,10,10,34,34,10,34,34,10,34,s,34,10,10,10,34,34,10,10,34,34,10,10);%cfclose(f);%csprintf(buff,%cgcc -Wall -Wextra -Werror -DREP Sully_%%d.c -o Sully_%%d%c,k,k);%csystem(buff);%cif(k!=0){sprintf(buff,%c./Sully_%%d%c,k);system(buff);}%c}%c";
-fprintf(f,s,10,10,10,k,10,10,10,10,10,10,34,34,10,34,34,10,34,s,34,10,10,10,34,34,10,10,34,34,10,10);
+const char *s="#include<fcntl.h>%1$c#include<stdio.h>%1$c#include<stdlib.h>%1$cint k=%4$d;%1$cint main(void){%1$c#ifdef REP%1$ck-=1;%1$c#endif%1$cchar buff[99];%1$csprintf(buff,%2$cSully_%%d.c%2$c,k);%1$cFILE *f=fopen(buff,%2$cw%2$c);%1$cconst char *s=%2$c%3$s%2$c;%1$cfprintf(f,s,10,34,s,k);%1$cfclose(f);%1$csprintf(buff,%2$cgcc -Wall -Wextra -Werror -DREP Sully_%%d.c -o Sully_%%d%2$c,k,k);%1$csystem(buff);%1$cif(k!=0){sprintf(buff,%2$c./Sully_%%d%2$c,k);system(buff);}%1$c}%1$c";
+fprintf(f,s,10,34,s,k);
 fclose(f);
 sprintf(buff,"gcc -Wall -Wextra -Werror -DREP Sully_%d.c -o Sully_%d",k,k);
 system(buff);
