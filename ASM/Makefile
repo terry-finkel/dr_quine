@@ -33,7 +33,7 @@ OBJ_3 :=				$(patsubst %.s, %.o, $(BIN3_SRC))
 ##    RULES    ##
 #################
 
-all: $(BIN_1) $(BIN_2)
+all: $(BIN_1) $(BIN_2) $(BIN_3)
 
 $(OBJ_1):
 	@$(SCC) $(BIN1_SRC)
@@ -45,8 +45,10 @@ $(OBJ_2):
 $(BIN_2): $(OBJ_2)
 	@$(CC) $(FLAGS) $< -o $@
 
+$(OBJ_3):
+	@$(SCC) $(BIN3_SRC)
 $(BIN_3): $(OBJ_3)
-	@$(CC) $(FORMAT) $(BIN3_SRC) -o $@
+	@$(CC) $(FLAGS) $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJ_1)
