@@ -1,4 +1,4 @@
-%define S "%%define S %c%s%c,0%c%%define P %cGrace_kid.s%c,0%c%%macro M 0%csection .data%cr db %cw%c%cp db P%cs db S%csection .text%cextern _exit%cextern _fopen%cextern _fprintf%cglobal _main%c_main:%cpush rbp%cmov rsp,rbp%clea rdi,[rel p]%clea rsi,[rel r]%ccall _fopen%cmov rdi,rax%clea rsi,[rel s]%cmov rdx,34%clea rcx,[rel s]%cmov r8,34%cmov r9,10%cmov r15,42%c.loop:%cpush 10%cdec r15%cjnz .loop%cadd dword[rsp],24%cadd dword[rsp+8],24%cadd dword[rsp+40],24%cadd dword[rsp+48],24%ccall _fprintf%ccall _exit%c%%endmacro%c;Start of main%cM%c",0
+%define S "%%define S %1$c%3$s%1$c,0%2$c%%define P %1$c%4$s%1$c,0%2$c%%macro M 0%2$csection .data%2$cr db %1$cw%1$c%2$cp db P%2$cs db S%2$csection .text%2$cextern _exit%2$cextern _fclose%2$cextern _fopen%2$cextern _fprintf%2$cglobal _main%2$c_main:%2$cpush rbp%2$cmov rbp,rsp%2$clea rdi,[rel p]%2$clea rsi,[rel r]%2$ccall _fopen%2$cmov rbx,rax%2$cmov rdi,rbx%2$clea rsi,[rel s]%2$cmov rdx,34%2$cmov rcx,10%2$cmov r8,rsi%2$clea r9,[rel p]%2$ccall _fprintf%2$cmov rdi,rbx%2$ccall _fclose%2$ccall _exit%2$c%%endmacro%2$c;Start of main%2$cM%2$c",0
 %define P "Grace_kid.s",0
 %macro M 0
 section .data
@@ -7,31 +7,26 @@ p db P
 s db S
 section .text
 extern _exit
+extern _fclose
 extern _fopen
 extern _fprintf
 global _main
 _main:
 push rbp
-mov rsp,rbp
+mov rbp,rsp
 lea rdi,[rel p]
 lea rsi,[rel r]
 call _fopen
-mov rdi,rax
+mov rbx,rax
+mov rdi,rbx
 lea rsi,[rel s]
 mov rdx,34
-lea rcx,[rel s]
-mov r8,34
-mov r9,10
-mov r15,42
-.loop:
-push 10
-dec r15
-jnz .loop
-add dword[rsp],24
-add dword[rsp+8],24
-add dword[rsp+40],24
-add dword[rsp+48],24
+mov rcx,10
+mov r8,rsi
+lea r9,[rel p]
 call _fprintf
+mov rdi,rbx
+call _fclose
 call _exit
 %endmacro
 ;Start of main

@@ -1,6 +1,6 @@
-;God bless loops
+;Positional arguments FTW
 section .data
-s db ";God bless loops%csection .data%cs db %c%s%c,0%csection .text%cextern _exit%cextern _printf%cglobal _main%c_main:%cpush rbp%cmov rbp,rsp%clea rdi,[rel s]%cmov rsi,10%cmov rdx,10%cmov rcx,34%clea r8,[rel s]%cmov r9,34%cmov r15,22;Because I can%c.loop:%cpush 10%cdec r15%cjnz .loop%ccall _printf%ccall _exit%c",0
+s db ";Positional arguments FTW%2$csection .data%2$cs db %1$c%3$s%1$c,0%2$csection .text%2$cextern _exit%2$cextern _printf%2$cglobal _main%2$c_main:%2$cpush rbp%2$cmov rbp,rsp%2$clea rdi,[rel s]%2$cmov rsi,34%2$cmov rdx,10%2$clea rcx,[rel s]%2$ccall _printf;MAGIC%2$ccall _exit%2$c",0
 section .text
 extern _exit
 extern _printf
@@ -9,15 +9,8 @@ _main:
 push rbp
 mov rbp,rsp
 lea rdi,[rel s]
-mov rsi,10
+mov rsi,34
 mov rdx,10
-mov rcx,34
-lea r8,[rel s]
-mov r9,34
-mov r15,22;Because I can
-.loop:
-push 10
-dec r15
-jnz .loop
-call _printf
+lea rcx,[rel s]
+call _printf;MAGIC
 call _exit
